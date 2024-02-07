@@ -1,0 +1,117 @@
+import os
+import subprocess
+from typing import List  # noqa: F401
+
+# libqtile imports
+from libqtile import hook
+from libqtile.config import Drag, Group, Key, DropDown, ScratchPad
+from libqtile.command import lazy
+
+# custom imports
+from screens import init_screens
+from Layouts.layouts import layouts
+from Layouts.floating import floating_layout
+from Keybinds.launch import launch
+from Keybinds.window_management import wind_mngmnt
+from Keybinds.media import media
+from popups import show_power_menu
+
+#mod4 or mod = super key
+mod = "mod4"
+mod1 = "alt"
+mod2 = "control"
+home = os.path.expanduser('~')
+
+@hook.subscribe.startup_once
+def autostart():
+    processes = [
+        ['nm-applet'],
+        ['blueman-applet'],
+        ['flameshot', 'gui', '-c', '--region', '5x6+0+0', '--accept-on-select'],
+        ['nitrogen', '--restore'],
+        ['dunst']
+    ]
+
+    for p in processes:
+        subprocess.Popen(p)
+
+@hook.subscribe.startup
+def autorun():
+    processes = [
+        ['picom'], 
+    ]
+
+    for p in processes:
+        subprocess.Popen(p)
+
+layout = layouts
+floating = floating_layout
+
+keys = wind_mngmnt + launch + media
+
+groups = []
+for i in range(0, 7):
+    groups.append(
+        Group(
+            name=str(i+1),
+            layout="monadtall",
+            label="⬤ ",
+        ))
+    
+dropdowns = [
+    DropDown("Terminal", "alacritty", x=0.05, y=0.2, width=0.9, height=0.6, opacity=0.9),
+    DropDown("Ranger", "alacritty -e ranger", x=0.05, y=0.2, width=0.9, height=0.6, opacity=0.9),
+    DropDown("Qute", "qutebrowser", x=0.49, y=0.02, width=0.5, height=0.95, opacity=0.9),
+]
+
+for i in dropdowns:
+    i.floating = True
+
+groups.append(
+   ScratchPad('0', dropdowns),
+)
+
+for i in groups:
+    keys.extend([
+
+    #CHANGE WORKSPACES
+        Key([mod], i.name, lazy.group[i.name].toscreen()),
+        Key([mod], "Tab", lazy.screen.next_group()),
+        Key([mod, "shift" ], "Tab", lazy.screen.prev_group()),
+
+    # MOVE WINDOW TO SELECTED WORKSPACE 1-7 AND STAY ON WORKSPACE
+        Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+
+    # MOVE WINDOW TO SELECTED WORKSPACE 1-7 AND FOLLOW MOVED WINDOW TO WORKSPACE
+        Key([mod, "shift"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
+
+    # POWER MENU
+        Key([mod, "shift"], "q", lazy.function(show_power_menu)),
+
+    # SCRATCHPADS
+        Key(['control'], "1", lazy.group['0'].dropdown_toggle('Ranger')),
+        Key(['control'], "2", lazy.group['0'].dropdown_toggle('Qute')),
+        Key(['control'], "3", lazy.group['0'].dropdown_toggle('Terminal')),
+    ])
+
+screens = init_screens()
+
+# MOUSE CONFIGURATION
+mouse = [
+    Drag([mod], "Button1", lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(),
+         start=lazy.window.get_size())
+]
+
+main = None
+
+follow_mouse_focus = True
+bring_front_click = False
+cursor_warp = False
+auto_fullscreen = True
+
+focus_on_window_activation = "focus" # or smart
+
+# wmname = "LG3D"
+wmname = "QTile"
