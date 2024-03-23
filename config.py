@@ -27,7 +27,6 @@ def autostart():
     processes = [
         ['nm-applet'],
         ['blueman-applet'],
-        ['flameshot', 'gui', '-c', '--region', '5x6+0+0', '--accept-on-select'],
         ['nitrogen', '--restore'],
         ['dunst']
     ]
