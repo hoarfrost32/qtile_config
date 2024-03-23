@@ -12,7 +12,7 @@ In the following code block, found in `config.py`, are the services I start when
 
 <br>
 
-This is what the primary screen looks like in a multi-monitor setup. The bar is aligned to the top and floating, and for all the other screens it is bottom aligned and not floating. The widget selection in that case is the same as the ones when there is only a single monitor available. While the widgets are defined in the `.py` files in the Widgets folder, the bar selection and alignment is handled in `screens.py`.
+This is what the primary screen looks like in a multi-monitor setup. The bar is aligned to the top and floating, and for all the other screens it is bottom aligned and not floating. The widget selection in that case is the same as when there is only a single monitor available. While the widgets are defined in the `.py` files in the Widgets folder, the bar selection and alignment is handled in `screens.py`.
 
 <br>
 
