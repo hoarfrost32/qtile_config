@@ -20,11 +20,11 @@ def init_layout_theme():
         return {"margin":5,
                 "border_width":1,
                 "border_focus": "#B5ACF5",
-                "border_normal": "#565C74"
+                "border_normal": "#565C74",
                 }
     else:
         return {"margin":8,
                 "border_width":2,
                 "border_focus": "#B5ACF5",
-                "border_normal": "#565C74"
+                "border_normal": "#565C74",
                 }

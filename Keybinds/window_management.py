@@ -15,18 +15,18 @@ wind_mngmnt = [
 # LOCK ACTIVE SESSION
     Key([mod], "l" , end_session("lock_session")),
 
+# CHANGE FOCUS
+    Key([mod], "Up", lazy.layout.up()),
+    Key([mod], "Down", lazy.layout.down()),
+    Key([mod], "Left", lazy.layout.left()),
+    Key([mod], "Right", lazy.layout.right()),
+
 # QTILE LAYOUT KEYS
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "space", lazy.next_layout()),
 
 # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod], "f", lazy.layout.flip()),
-
-# CHANGE FOCUS
-    Key([mod], "Up", lazy.layout.up()),
-    Key([mod], "Down", lazy.layout.down()),
-    Key([mod], "Left", lazy.layout.left()),
-    Key([mod], "Right", lazy.layout.right()),
 
 # SUPER + SHIFT KEYBINDINGS
 
@@ -48,26 +48,16 @@ wind_mngmnt = [
   # RESIZE UP, DOWN, LEFT, RIGHT
 
       Key([mod, "control"], "Right",
-          lazy.layout.grow_right(),
           lazy.layout.grow(),
-          lazy.layout.increase_ratio(),
-          lazy.layout.delete(),
           ),
       Key([mod, "control"], "Left",
-          lazy.layout.grow_left(),
           lazy.layout.shrink(),
-          lazy.layout.decrease_ratio(),
-          lazy.layout.add(),
           ),
       Key([mod, "control"], "Up",
-          lazy.layout.grow_up(),
           lazy.layout.grow(),
-          lazy.layout.decrease_nmaster(),
           ),
       Key([mod, "control"], "Down",
-          lazy.layout.grow_down(),
           lazy.layout.shrink(),
-          lazy.layout.increase_nmaster(),
           ),
 
   # FLIP LAYOUT FOR BSP
@@ -77,6 +67,6 @@ wind_mngmnt = [
     Key([mod, "mod1"], "h", lazy.layout.flip_left()),
 
   # MOVE WINDOW TO NEXT SCREEN
-    Key([mod,"shift"], "Right", lazy.function(window_to_next_screen, switch_screen=True)),
-    Key([mod,"shift"], "Left", lazy.function(window_to_previous_screen, switch_screen=True)),
+    Key([mod, "mod1"], "Right", window_to_next_screen),
+    Key([mod, "mod1"], "Left",  window_to_previous_screen),
 ]

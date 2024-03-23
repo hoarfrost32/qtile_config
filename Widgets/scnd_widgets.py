@@ -66,7 +66,7 @@ widgets_list2 = [
             widget.Spacer(background = colors[1], decorations = [PowerLineDecoration(path='forward_slash', size=8)]),
             widget.Sep(
                 linewidth = 0,
-                padding = 15,
+                padding = 3,
                 foreground = colors[1],
                 background = colors[2],
             ),

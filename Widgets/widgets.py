@@ -152,7 +152,7 @@ widgets_list1 = [
                 hour_length = 0.3,
                 minute_length = 0.5,
                 adjust_y = -7,
-                decorations = [RectDecoration(colour=colors[2], radius=13, filled=True, padding_y=3, group=True)]
+                decorations = [RectDecoration(colour=colors[2], radius=11, filled=True, padding_y=3)]
             ),
             widget.Clock(
                     foreground = colors[2],

@@ -1,4 +1,4 @@
-from libqtile.config import Key
+from libqtile.config import Key, KeyChord
 from libqtile.command import lazy
 from libqtile import extension
 
@@ -12,16 +12,20 @@ launch = [
 # LAUNCH PROGRAMS
 
   # GUI PROGRAMS
-    Key([mod], "i", lazy.spawn("code")),                  # IDE, VSCode for now.
-    Key([mod], "b", lazy.spawn("firefox")),               # Browser.
-    Key([mod], "d", lazy.spawn("thunar")),                # File Manager.
-    Key([mod, "shift"], "s", screencap),                 # Screenshot but keybind same as in windows
-    Key([], "Print", screencap),                          # Screenshot Utility.
-    Key(["mod1"], "t", lazy.spawn("telegram-desktop")),   # Telegram.
+    Key([mod], "i", lazy.spawn("code")),                      # IDE, VSCode for now.
+    Key([mod], "b", lazy.spawn("firefox")),                   # Browser.
+    # KeyChord([mod], "b", [
+    #   Key([], "p", lazy.function(
+    #     lambda qtile: qtile.cmd_spawn("firefox --private-window")
+    #   )), 
+    # ]),                                                       # Private Browser.          
+    Key([mod], "d", lazy.spawn("thunar")),                    # File Manager.
+    Key([mod, "shift"], "s", screencap),                      # Screenshot but keybind same as in windows
+    Key([], "Print", screencap),                              # Screenshot Utility.
+    Key(["mod1"], "t", lazy.spawn("telegram-desktop")),       # Telegram.
 
   # TERMINAL/TUI PROGRAMS
-    Key([mod], "t", lazy.spawn("alacritty")),                   # Alacritty.
-    Key([mod], "m", lazy.spawn("alacritty -e ranger")),         # Ranger, a TUI file manager.
+    Key([mod], "t", lazy.spawn("alacritty")),                 # Alacritty.
 
   # Run Dmenu
   Key([mod], "r", lazy.run_extension(extension.DmenuRun(

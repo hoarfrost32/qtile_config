@@ -35,14 +35,14 @@ def autostart():
     for p in processes:
         subprocess.Popen(p)
 
-@hook.subscribe.startup
-def autorun():
-    processes = [
-        ['picom'], 
-    ]
+# @hook.subscribe.startup
+# def autorun():
+#     processes = [
+#         # ['picom'], 
+#     ]
 
-    for p in processes:
-        subprocess.Popen(p)
+#     for p in processes:
+#         subprocess.Popen(p)
 
 layout = layouts
 floating = floating_layout
@@ -59,9 +59,10 @@ for i in range(0, 7):
         ))
     
 dropdowns = [
-    DropDown("Terminal", "alacritty", x=0.05, y=0.2, width=0.9, height=0.6, opacity=0.9),
+    DropDown("Terminal", "alacritty -e tmux", x=0.05, y=0.2, width=0.9, height=0.6, opacity=0.9),
     DropDown("Ranger", "alacritty -e ranger", x=0.05, y=0.2, width=0.9, height=0.6, opacity=0.9),
     DropDown("Qute", "qutebrowser", x=0.49, y=0.02, width=0.5, height=0.95, opacity=0.9),
+    DropDown("Mail", "thunderbird", x=0.05, y=0.1, width=0.9, height=0.75, opacity=0.9, on_focus_lost_hide=False),
 ]
 
 for i in dropdowns:
@@ -72,27 +73,31 @@ groups.append(
 )
 
 for i in groups:
-    keys.extend([
 
-    #CHANGE WORKSPACES
-        Key([mod], i.name, lazy.group[i.name].toscreen()),
-        Key([mod], "Tab", lazy.screen.next_group()),
-        Key([mod, "shift" ], "Tab", lazy.screen.prev_group()),
+    if i.name != "0":
+        keys.extend([
+        #CHANGE WORKSPACES
+            Key([mod], i.name, lazy.group[i.name].toscreen()),
+            Key([mod], "Tab", lazy.screen.next_group()),
+            Key([mod, "shift" ], "Tab", lazy.screen.prev_group()),
 
-    # MOVE WINDOW TO SELECTED WORKSPACE 1-7 AND STAY ON WORKSPACE
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+        # MOVE WINDOW TO SELECTED WORKSPACE 1-7 AND STAY ON WORKSPACE
+            Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
 
-    # MOVE WINDOW TO SELECTED WORKSPACE 1-7 AND FOLLOW MOVED WINDOW TO WORKSPACE
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
+        # MOVE WINDOW TO SELECTED WORKSPACE 1-7 AND FOLLOW MOVED WINDOW TO WORKSPACE
+            Key([mod, "shift"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
 
-    # POWER MENU
-        Key([mod, "shift"], "q", lazy.function(show_power_menu)),
+        # POWER MENU
+            Key([mod, "shift"], "q", lazy.function(show_power_menu)),
+        ])
 
-    # SCRATCHPADS
-        Key(['control'], "1", lazy.group['0'].dropdown_toggle('Ranger')),
-        Key(['control'], "2", lazy.group['0'].dropdown_toggle('Qute')),
-        Key(['control'], "3", lazy.group['0'].dropdown_toggle('Terminal')),
-    ])
+keys.extend([
+# SCRATCHPADS
+    Key(['control'], "1", lazy.group['0'].dropdown_toggle('Ranger')),
+    Key(['control'], "2", lazy.group['0'].dropdown_toggle('Qute')),
+    Key(['control'], "3", lazy.group['0'].dropdown_toggle('Terminal')),
+    Key(['control'], "4", lazy.group['0'].dropdown_toggle('Mail')),
+])
 
 screens = init_screens()
 
@@ -113,5 +118,4 @@ auto_fullscreen = True
 
 focus_on_window_activation = "focus" # or smart
 
-# wmname = "LG3D"
-wmname = "QTile"
+wmname = "Qtile"
