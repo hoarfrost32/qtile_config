@@ -1,4 +1,6 @@
-# <center>qtile_config</center>
+# <center>My Qtile Config</center>
+
+QTile is a great window manager that (sort of) is an XMonad clone, except its written and configured in python, and is much more of a complete package with its own bar (and systray) and no plugins (though there are some extra widgets and styling options provided through qtile-extras which I do use). 
 
 <br>
 
