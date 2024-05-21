@@ -34,8 +34,9 @@ def init_screens():
         connected_monitors = int(command.stdout.decode("UTF-8"))
 
     if connected_monitors == 1:
-        screens.insert(0, Screen(bottom=bar.Bar(widgets=widgets_list2, size=30, opacity=0.8, margin = [0, 0, 0, 0])))
-        screens.pop()  
+        del widgets_list1[5:6]
+        screens.insert(0, Screen(bottom=bar.Bar(widgets=widgets_list1, size=30, opacity=0.8, margin = [0, 0, 0, 0])))
+        screens.pop() 
  
     else:
 
