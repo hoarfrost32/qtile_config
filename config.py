@@ -5,7 +5,7 @@ from typing import List  # noqa: F401
 # libqtile imports
 from libqtile import hook
 from libqtile.config import Drag, Group, Key, DropDown, ScratchPad
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 
 # custom imports
 from screens import init_screens
@@ -25,10 +25,11 @@ home = os.path.expanduser('~')
 @hook.subscribe.startup_once
 def autostart():
     processes = [
-        ['nm-applet'],
-        ['blueman-applet'],
-        ['nitrogen', '--restore'],
-        ['dunst']
+      ['nm-applet'],
+      ['blueman-applet'],
+      ['nitrogen', '--restore'],
+      ['flameshot', 'screen', '--region', '1x1+0+0', '-c']
+      ['dunst']
     ]
 
     for p in processes:
@@ -37,7 +38,7 @@ def autostart():
 # @hook.subscribe.startup
 # def autorun():
 #     processes = [
-#         # ['picom'], 
+#         # ['picom'],
 #     ]
 
 #     for p in processes:
@@ -56,11 +57,11 @@ for i in range(0, 7):
             layout="monadtall",
             label="⬤ ",
         ))
-    
+
 dropdowns = [
     DropDown("Terminal", "alacritty -e tmux", x=0.05, y=0.2, width=0.9, height=0.6, opacity=0.9),
     DropDown("Ranger", "alacritty -e ranger", x=0.05, y=0.2, width=0.9, height=0.6, opacity=0.9),
-    DropDown("Qute", "qutebrowser", x=0.49, y=0.02, width=0.5, height=0.95, opacity=0.9),
+    # DropDown("Qute", "qutebrowser", x=0.49, y=0.02, width=0.5, height=0.95, opacity=0.9),
     DropDown("Mail", "thunderbird", x=0.05, y=0.1, width=0.9, height=0.75, opacity=0.9, on_focus_lost_hide=False),
 ]
 
@@ -93,7 +94,7 @@ for i in groups:
 keys.extend([
 # SCRATCHPADS
     Key(['control'], "1", lazy.group['0'].dropdown_toggle('Ranger')),
-    Key(['control'], "2", lazy.group['0'].dropdown_toggle('Qute')),
+    # Key(['control'], "2", lazy.group['0'].dropdown_toggle('Qute')),
     Key(['control'], "3", lazy.group['0'].dropdown_toggle('Terminal')),
     Key(['control'], "4", lazy.group['0'].dropdown_toggle('Mail')),
 ])

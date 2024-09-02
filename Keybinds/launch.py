@@ -1,5 +1,5 @@
 from libqtile.config import Key, KeyChord
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 from libqtile import extension
 
 from .lazy_funcs import screencap
@@ -12,13 +12,13 @@ launch = [
 # LAUNCH PROGRAMS
 
   # GUI PROGRAMS
-    Key([mod], "i", lazy.spawn("code")),                      # IDE, VSCode for now.
+    Key([mod], "i", lazy.spawn("zed")),                      # IDE, VSCode for now.
     Key([mod], "b", lazy.spawn("firefox")),                   # Browser.
     # KeyChord([mod], "b", [
     #   Key([], "p", lazy.function(
     #     lambda qtile: qtile.cmd_spawn("firefox --private-window")
-    #   )), 
-    # ]),                                                       # Private Browser.          
+    #   )),
+    # ]),                                                       # Private Browser.
     Key([mod], "d", lazy.spawn("thunar")),                    # File Manager.
     Key([mod, "shift"], "s", screencap),                      # Screenshot but keybind same as in windows
     Key([], "Print", screencap),                              # Screenshot Utility.
@@ -39,4 +39,5 @@ launch = [
         fontsize = 12,
         dmenu_ignorecase=True,
     ))),
+
 ]
