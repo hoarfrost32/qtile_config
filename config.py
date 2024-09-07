@@ -27,14 +27,18 @@ def autostart():
     processes = [
       ['nm-applet'],
       ['blueman-applet'],
+      ['xrandr', '--output', 'eDP-1-1', '--mode', '1920x1080', '--pos', '2560x180'],
       ['nitrogen', '--restore'],
-      ['flameshot', 'screen', '--region', '1x1+0+0', '-c']
+      ['flameshot', 'screen', '--region', '1x1+0+0', '-c'],
       ['dunst']
     ]
 
     for p in processes:
         subprocess.Popen(p)
 
+# Picom is managed by my home-manager in nix so I dont need this
+# anymore. Uncomment to run picom at startup though if needed.
+#
 # @hook.subscribe.startup
 # def autorun():
 #     processes = [
@@ -97,6 +101,10 @@ keys.extend([
     # Key(['control'], "2", lazy.group['0'].dropdown_toggle('Qute')),
     Key(['control'], "3", lazy.group['0'].dropdown_toggle('Terminal')),
     Key(['control'], "4", lazy.group['0'].dropdown_toggle('Mail')),
+    
+# ROFI
+    # Use Rofi to see all the windows
+    Key(["mod1"], "tab", lazy.spawn('rofi -show window'))
 ])
 
 screens = init_screens()
