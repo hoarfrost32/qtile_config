@@ -27,8 +27,8 @@ def autostart():
     processes = [
       ['nm-applet'],
       ['blueman-applet'],
-      ['xrandr', '--output', 'eDP-1-1', '--mode', '1920x1080', '--pos', '2560x180'],
-      ['nitrogen', '--restore'],
+      ["xrandr", "--output", "eDP-1-1", "--mode", "1920x1080", "--pos", "2560x180"],
+      ["xrandr", "--output", "DP-2", "--mode", "2560x1440", "--refresh", "165"],
       ['flameshot', 'screen', '--region', '1x1+0+0', '-c'],
       ['dunst']
     ]
@@ -40,13 +40,14 @@ def autostart():
 # anymore. Uncomment to run picom at startup though if needed.
 #
 # @hook.subscribe.startup
-# def autorun():
-#     processes = [
-#         # ['picom'],
-#     ]
+def autorun():
+    processes = [
+        # ['picom'],
+        ['nitrogen', '--restore']
+    ]
 
-#     for p in processes:
-#         subprocess.Popen(p)
+    for p in processes:
+        subprocess.Popen(p)
 
 layout = layouts
 floating = floating_layout
