@@ -27,22 +27,19 @@ def autostart():
     processes = [
       ['nm-applet'],
       ['blueman-applet'],
-      ["xrandr", "--output", "eDP-1-1", "--mode", "1920x1080", "--pos", "2560x180"],
-      ["xrandr", "--output", "DP-2", "--mode", "2560x1440", "--refresh", "165"],
-      ['flameshot', 'screen', '--region', '1x1+0+0', '-c'],
-      ['dunst']
+      ["xrandr", "--output", "DP-2", "--primary"],
+      ["xrandr", "--output", "DP-4", "--right-of", "DP-2"],
+      ['flameshot'],
+      ['dunst'],
+      ['parcellite']
     ]
-
+    
     for p in processes:
         subprocess.Popen(p)
 
-# Picom is managed by my home-manager in nix so I dont need this
-# anymore. Uncomment to run picom at startup though if needed.
-#
-# @hook.subscribe.startup
+@hook.subscribe.startup
 def autorun():
     processes = [
-        # ['picom'],
         ['nitrogen', '--restore']
     ]
 
@@ -64,7 +61,7 @@ for i in range(0, 7):
         ))
 
 dropdowns = [
-    DropDown("Terminal", "alacritty -e tmux", x=0.05, y=0.2, width=0.9, height=0.6, opacity=0.9),
+    DropDown("Terminal", "alacritty -e tmux -u", x=0.05, y=0.2, width=0.9, height=0.6, opacity=0.9),
     DropDown("Ranger", "alacritty -e ranger", x=0.05, y=0.2, width=0.9, height=0.6, opacity=0.9),
     # DropDown("Qute", "qutebrowser", x=0.49, y=0.02, width=0.5, height=0.95, opacity=0.9),
     DropDown("Mail", "thunderbird", x=0.05, y=0.1, width=0.9, height=0.75, opacity=0.9, on_focus_lost_hide=False),

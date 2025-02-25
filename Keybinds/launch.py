@@ -12,8 +12,8 @@ launch = [
 # LAUNCH PROGRAMS
 
   # GUI PROGRAMS
-    Key([mod], "i", lazy.spawn("lapce")),                      # IDE, Lapce for now.
-    Key([mod], "b", lazy.spawn("firefox")),                   # Browser.
+    Key([mod], "i", lazy.spawn("emacsclient -c")),                      # IDE, Lapce for now.
+    Key([mod], "b", lazy.spawn("firefox-nightly")),                   # Browser.
     # KeyChord([mod], "b", [
     #   Key([], "p", lazy.function(
     #     lambda qtile: qtile.cmd_spawn("firefox --private-window")

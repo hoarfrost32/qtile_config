@@ -85,7 +85,7 @@ widgets_list1 = [
                     fontsize = 15,
                     foreground = colors[2],
                     background = colors[1],
-                    max_chars = 150,
+                    max_chars = 60,
                     for_current_screen = True,
             ),
             widget.Spacer(background = colors[1]),

@@ -60,7 +60,7 @@ widgets_list2 = [
                     fontsize = 15,
                     foreground = colors[2],
                     background = colors[1],
-                    max_chars = 98,
+                    max_chars = 60,
                     for_current_screen = False,
             ),
             widget.Spacer(background = colors[1], decorations = [PowerLineDecoration(path='forward_slash', size=8)]),
